@@ -18,7 +18,7 @@
  <mvc:resources mapping="/static/css/**" location="/static/css/" />
 
 
- <context:component-scan base-package="lanqiao.controller"></context:component-scan>
+ <context:component-scan base-package="controller"></context:component-scan>
     <context:component-scan base-package="api"></context:component-scan>
  <!--jsp解析器，InternalResourceViewResolver需要配置再最后，order值(优先级最低)最高，要比其他解析器低，因为不管其优先级如何，最后一定会执行，但是优先级高于其他解析器会导致其他解析器不起作用 -->
  <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -27,5 +27,11 @@
   <property name="suffix" value=".jsp"/>
   <property name="contentType" value="text/html;charset=UTF-8"/>
 
+ </bean>
+ <!-- 支持上传文件 -->
+ <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+  <property name="defaultEncoding" value="utf-8"></property>
+  <property name="maxUploadSize" value="10485760000"></property>
+  <property name="maxInMemorySize" value="40960"></property>
  </bean>
 </beans>
