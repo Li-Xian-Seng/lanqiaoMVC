@@ -1,12 +1,41 @@
 package entity;
 
-public class User {
+public class UserRole {
 private int id;
     private String username;
     private String password;
     private int status;
     private String images_header;
     private String staffname;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    private  String name;
+    private String role;
+
+//    public List<String> getList() {
+//        return list;
+//    }
+//
+//    public void setList(List<String> list) {
+//        this.list = list;
+//    }
+//
+//    private List<String> list;
     public int getId() {
         return id;
     }
