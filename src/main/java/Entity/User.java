@@ -48,7 +48,7 @@ public class User {
     }
 
     public void setStaffname(String staffname) {
-        this.staffname = staffname;
+        this.staffname =staffname;
     }
 
     public int getDeptId() {
