@@ -1,6 +1,6 @@
 package api;
 
-import Entity.UserRole;
+import entity.UserRole;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,7 +11,7 @@ import vo.JsonRequst;
 import java.util.List;
 
 @Controller
-public class ExApi {
+public class QuaryApi {
     /**
      * 查询用户信息角色 和部门
      * @return
