@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.userDao.ModifyDaoInterface">
+ <update id="modifyDao" parameterType="hashMap">
+        UPDATE t_user tu LEFT JOIN
+t_user_role tur on tu.id=tur.user_id
+left join t_dept td on td.id=tu.dept_id
+set tur.role_id = (select id from t_role where name=#{role}),tu.dept_id =(select id from t_dept where dept_name=#{dept}),tu.username=#{username}
+where tu.id=#{id}
+ </update>
+
+
+</mapper>

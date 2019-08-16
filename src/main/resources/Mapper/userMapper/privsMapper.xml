@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.userDao.CaiDanDao">
+
+   <select id="privSelsct"  resultMap="privsMap">
+      select son.id as father_id,son.`name` as father_name,father.id ,father.`name` ,father.url from t_permission as son
+left join t_role_permission as trp on son.id=trp.permission_id
+left join t_role as tr on tr.id=trp.role_id
+left join t_user_role as tur on tur.role_id=tr.id
+left join t_user as tu on tu.id=tur.user_id
+left join t_permission as father on father.parantid=son.id
+where tu.id=#{id} and father.id is not null and son.id != father.id
+      </select>
+    <resultMap id="privsMap" type="entity.Privs">
+            <id property="privId" column="father_id" jdbcType="TINYINT"></id>
+            <result property="name" column="father_name" jdbcType="VARCHAR"></result>
+        <collection property="data" ofType="entity.Privs">
+            <id property="privId" column="id" jdbcType="TINYINT"></id>
+            <result property="name" column="name" jdbcType="VARCHAR"></result>
+            <result property="url" column="url" jdbcType="VARCHAR"></result>
+        </collection>
+    </resultMap>
+
+</mapper>

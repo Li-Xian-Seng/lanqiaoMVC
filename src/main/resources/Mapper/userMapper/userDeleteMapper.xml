@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.userDao.DeleteDaoInterface">
+<update id="deleteDao">
+    UPDATE t_user a INNER JOIN t_user_role c on c.user_id=a.id SET a.status = 0 WHERE
+    c.role_id=3 and id in
+    <foreach item="item" collection="array"
+             open ="(" separator="," close =")">
+        #{item}
+    </foreach>
+</update>
+    <delete id="DeletePostIn">
+        delete from t_user where id in
+        <foreach item="item" collection="array"
+                 open ="(" separator="," close =")">
+            #{item}
+        </foreach>
+    </delete>
+    <select id="serchuser" parameterType="hashMap" resultType="entity.UserRole">
+        select e.id id,staffname,username,status,h.dept_name name ,u.`name` role ,e.images_header
+        FROM t_user e LEFT JOIN t_dept h on h.id=e.dept_id LEFT JOIN t_user_role f on h.id=f.user_id
+        left join t_role u on f.role_id=u.id
+          where 1=1
+
+              and  u.`name` like #{name}
+
+
+        ORDER BY id ASC
+    </select>
+
+</mapper>

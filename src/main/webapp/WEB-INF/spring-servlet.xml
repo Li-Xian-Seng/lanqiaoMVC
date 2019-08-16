@@ -17,9 +17,16 @@
  <mvc:resources mapping="/static/js/**" location="/static/js/" />
  <mvc:resources mapping="/static/css/**" location="/static/css/" />
 
+ <!--<mvc:interceptors>-->
+  <!--<mvc:interceptor>-->
+   <!--<mvc:mapping path="/api/**"/>-->
+   <!--<bean class="interceptor.AtuchInterceptor"/>-->
+  <!--</mvc:interceptor>-->
+ <!--</mvc:interceptors>-->
 
  <context:component-scan base-package="controller"></context:component-scan>
-    <context:component-scan base-package="api"></context:component-scan>
+ <context:component-scan base-package="api"></context:component-scan>
+
  <!--jsp解析器，InternalResourceViewResolver需要配置再最后，order值(优先级最低)最高，要比其他解析器低，因为不管其优先级如何，最后一定会执行，但是优先级高于其他解析器会导致其他解析器不起作用 -->
  <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
   <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>

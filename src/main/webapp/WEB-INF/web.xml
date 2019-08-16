@@ -47,7 +47,7 @@
   <!-- Spring配置文件加载地址 -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:applicationContext.xml</param-value>
+    <param-value>classpath:applicationContext*.xml</param-value>
   </context-param>
   <!-- 监听器配置 -->
   <!-- Spring context加载监听，Spring程序就是从这启动的 -->

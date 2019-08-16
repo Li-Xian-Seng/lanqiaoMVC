@@ -13,13 +13,11 @@
     </plugins>
 
     <mappers>
-        <mapper resource="Mapper/userMapper.xml"/>
-        <mapper resource="Mapper/privsMapper.xml"/>
-        <mapper resource="Mapper/userDeleteMapper.xml"/>
-        <mapper resource="Mapper/deptMapper.xml"/>
-        <mapper resource="Mapper/modifyMapper.xml"/>
-        <mapper resource="Mapper/PermissionMapper.xml"/>
-
-
+        <mapper resource="Mapper/userMapper/userMapper.xml"/>
+        <mapper resource="Mapper/userMapper/privsMapper.xml"/>
+        <mapper resource="Mapper/userMapper/userDeleteMapper.xml"/>
+        <mapper resource="Mapper/userMapper/deptMapper.xml"/>
+        <mapper resource="Mapper/userMapper/modifyMapper.xml"/>
+        <mapper resource="Mapper/userMapper/PermissionMapper.xml"/>
     </mappers>
 </configuration>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.userDao.UserQuaryInerface">
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+    <!--<cache-ref namespace=""/>-->
+    <!-- 跨Mapper二级缓存-->
+    <sql id="Bleans">
+        id,username,password,status,images_header
+    </sql>
+    <select id="UserQuary" useCache="true" resultType="entity.User">
+        select <include refid="Bleans" ></include>
+        from t_user
+    </select>
+    <select id="userManyDao" parameterType="HashMap" resultType="entity.UserRole">
+        select e.id id,staffname,username,status,h.dept_name name ,u.`name` role ,e.images_header
+        FROM t_user e LEFT JOIN t_dept h on h.id=e.dept_id
+        LEFT JOIN t_user_role f on h.id=f.user_id
+        left join t_role u on f.role_id=u.id
+        <where>
+              <if test="userId!=null and userId!='' ">
+                  and e.id=#{userId}
+              </if>
+            <if test="name!=null and name!='' ">
+                and name=#{deptName}
+            </if>
+            <if test="role!=null and role!='' ">
+                and role=#{roleName}
+            </if>
+            <if test="status!=null and status!='' ">
+                and status=#{status}
+            </if>
+            <if test="userName!=null and userName!='' ">
+                and username=#{userName}
+            </if>
+        </where>
+        <!-- ORDER BY id ${UserVule} -->
+        <if test="UserVule='asc'">
+            ORDER BY id ASC
+        </if>
+        <if test="UserVule=='desc'">
+            ORDER BY id desc
+        </if>
+    </select>
+    <select id="userQuary" resultType="entity.UserRole">
+        select e.id id,staffname,username,status,h.dept_name name ,u.`name` role ,e.images_header FROM t_user e LEFT JOIN t_dept h on h.id=e.dept_id LEFT JOIN t_user_role f on h.id=f.user_id left join t_role u on f.role_id=u.id ORDER BY id ASC
+    </select>
+    <insert id="addDao" parameterType="entity.User" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO `hehe`.`t_user`(`dept_id`, `staffname`, `username`, `password`, `status`, `images_header`) VALUES ( #{deptId},#{staffname},#{username},#{password},1,#{images_header} )
+    </insert>
+    <insert id="roleDao" parameterType="int">
+        INSERT INTO `hehe`.`t_user_role`(`user_id`, `role_id`) VALUES (#{id}, 3)
+    </insert>
+<update id="deleteDao" parameterType="int">
+    UPDATE `hehe`.`t_user` SET  `status` = 0 WHERE `id` = #{id};
+</update>
+<update id="recoveryUser" parameterType="int">
+    UPDATE `hehe`.`t_user` SET  `status` = 1 WHERE `id` = #{id};
+</update>
+</mapper>
