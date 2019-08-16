@@ -1,29 +1,30 @@
-package api;
+package api.user;
 
-import service.ModifyService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import service.ModifyServiceInterface;
+import service.serviceImpl.ModifyServiceImpl;
 import vo.JsonRequst;
 @RestController
 @CrossOrigin(allowCredentials = "true")
 public class ModifyApi {
+    @Autowired
+    ModifyServiceInterface m;
     /**
      * 修改用户信息
      * @param id
-     * @param dept_id
-     * @param staffname
+     * @param
+     * @param
      * @param username
      * @return
      */
-    @RequestMapping("/abc/modify")
+    @RequestMapping(value = "/api/modifyApi",method = RequestMethod.POST)
+    @ResponseBody
         public JsonRequst modifyApi(@RequestParam("id")int id,
-                                    @RequestParam("dept_id")int dept_id,
-                                    @RequestParam("staffname")String staffname,
+                                    @RequestParam("dept")String dept,
+                                    @RequestParam("role")String role,
                                     @RequestParam("username")String username  ){
-            ModifyService m=new ModifyService();
-            int i=m.modifyService(id,dept_id,staffname,username);
+            int i=m.modifyService(id,dept,role,username);
             JsonRequst json=null;
             try{
                 if(i!=0){

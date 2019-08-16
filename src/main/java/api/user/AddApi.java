@@ -1,23 +1,24 @@
-package api;
+package api.user;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import service.AddService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import service.AddServiceInterface;
+import service.serviceImpl.AddServiceImpl;
 import vo.JsonRequst;
 
 @RestController
 @CrossOrigin(allowCredentials = "true")
 public class AddApi {
-    @RequestMapping("/api/addApi")
+
+    @Autowired
+    AddServiceInterface d;
+    @RequestMapping(value = "/api/addApi",method = RequestMethod.POST)
+    @ResponseBody
     public JsonRequst addApi(@RequestParam("username")String username,
                              @RequestParam("password")String password,
-                             @RequestParam("image-header")String images_header,
+                             @RequestParam("image")String images_header,
                              @RequestParam("staffname")String staffname,
                              @RequestParam("deptId")int deptId){
-
-        AddService d=new AddService();
         int i=d.addService(username,password,images_header,staffname,deptId);
         JsonRequst json=null;
         try {
